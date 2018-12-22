@@ -5,6 +5,9 @@ var PRODUCTS = [
   { id: 'product-4', name: 'Clean Code', price: 70 },
 ];
 
+/**
+ * Get all products.
+ */
 function all () {
   return PRODUCTS;
 }
