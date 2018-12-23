@@ -83,7 +83,7 @@ function remove (productId) {
 
   var productIndex = productIds.indexOf(productId);
 
-  if (productId === -1) throw new Error('Product with ID ' + productId + ' was not found.');
+  if (productIndex === -1) throw new Error('Product with ID `' + productId + '` was not found.');
 
   PRODUCTS.splice(productIndex, 1);
 

@@ -73,7 +73,7 @@ router.delete('/products/:id', function (request, response) {
   }
 
   response.json({
-    message: 'Product with ID' + productId + 'was successfully been deleted.',
+    message: 'Product with ID `' + productId + '` has successfully been deleted.',
   });
 });
 
