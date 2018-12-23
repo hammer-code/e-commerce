@@ -9,8 +9,8 @@ function setupCart (products) {
         price: 60,
         description: 'Lorem'
       },
-      { 
-        id: 'product-2',  
+      {
+        id: 'product-2',
         name: 'Eloquent JS',
         price: 40,
         description: 'Lorem',
@@ -24,7 +24,7 @@ function setupCart (products) {
     var product = products[i];
     c = cart.addItem(c, product, 1);
   }
-  
+
   return {
     cart: c,
     expectedTotal: 100,
@@ -38,9 +38,31 @@ describe('cart module', () => {
     expect(Array.isArray(c.lineItems)).toBe(true);
   });
 
+  test('create cart with initial line items', function () {
+    var initialLineItems = [
+      { productId: 'product-1', name: 'Awesome Book', price: 20, qty: 3 },
+      { productId: 'product-5', name: 'Good Book', price: 40,  qty: 2 },
+    ];
+
+    var c = cart.create(initialLineItems);
+
+    expect(Array.isArray(c.lineItems)).toBe(true);
+    expect(c.lineItems.length).toBe(2);
+
+    expect(c.lineItems[0].productId).toBe('product-1');
+    expect(c.lineItems[0].name).toBe('Awesome Book');
+    expect(c.lineItems[0].price).toBe(20);
+    expect(c.lineItems[0].qty).toBe(3);
+
+    expect(c.lineItems[1].productId).toBe('product-5');
+    expect(c.lineItems[1].name).toBe('Good Book');
+    expect(c.lineItems[1].price).toBe(40);
+    expect(c.lineItems[1].qty).toBe(2);
+  });
+
   test('add product to cart', function () {
-    var productA = { 
-      id: 'product-1',  
+    var productA = {
+      id: 'product-1',
       name: 'Eloquent JS',
       price: 50,
       description: 'Lorem',
@@ -51,7 +73,7 @@ describe('cart module', () => {
     c = cart.addItem(c, productA, 2);
 
     var lineItems = c.lineItems;
-    
+
     expect(lineItems.length).toBe(1);
     expect(lineItems[0].productId).toBe('product-1');
     expect(lineItems[0].name).toBe('Eloquent JS');
@@ -116,7 +138,7 @@ describe('cart module', () => {
       amount: 30
     }
 
-    expect(cart.total(c, discountB)).toBe(70)    
+    expect(cart.total(c, discountB)).toBe(70)
   })
 
   test('discountByPercent', () => {
@@ -143,15 +165,15 @@ describe('cart module', () => {
         amount: 15,
         type: 'percent'
       }
-  
+
       expect(cart.applyDiscount(1000, d1)).toBe(850)
-  
+
       var d2 =  {
         amount: 300,
         type: 'nominal'
       }
-  
-      expect(cart.applyDiscount(1000, d2)).toBe(700)    
+
+      expect(cart.applyDiscount(1000, d2)).toBe(700)
       expect(cart.applyDiscount(1000, null)).toBe(1000)
       expect(cart.applyDiscount(1000, undefined)).toBe(1000)
     })

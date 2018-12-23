@@ -40,7 +40,7 @@ describe('POST /api/carts/:id/line-items', function () {
         expect(body.cart.lineItems[0].price).toBe(20);
         expect(body.cart.lineItems[0].qty).toBe(2);
         expect(body.total).toBe(40);
-      })
+      });
 
     payload = {
       item: {
@@ -64,6 +64,28 @@ describe('POST /api/carts/:id/line-items', function () {
         expect(body.cart.lineItems[1].price).toBe(50);
         expect(body.cart.lineItems[1].qty).toBe(3);
         expect(body.total).toBe(40 + 150);
+      });
+  });
+
+  test('should return 404 when trying to add item into non-existent cart', async function () {
+    var payload = {
+      item: {
+        productId: 'product-1', // Its price is 20
+        qty: 2,
+      }
+    };
+
+    var URL = url('/carts/dummy-id/line-items')
+
+    await request(app)
+      .post(URL)
+      .send(payload)
+      .expect('Content-Type', /json/)
+      .then(function (response) {
+        var body = response.body;
+
+        expect(response.status).toBe(404);
+        expect(body.message).toBe('Cart with ID `dummy-id` was not found');
       })
   });
 });

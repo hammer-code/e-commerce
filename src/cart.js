@@ -1,10 +1,16 @@
 /**
+ * @param  {Entities.LineItem[]} initialLineItems
  * @return {Cart}
  */
-function create() {
+function create(initialLineItems) {
+  var lineItems = [];
+  if (Array.isArray(initialLineItems)) {
+    lineItems = initialLineItems;
+  }
+
   return {
     id: generateID(),
-    lineItems: [],
+    lineItems: lineItems,
   }
 }
 
