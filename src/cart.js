@@ -21,6 +21,16 @@ function createLineItem(product, qty) {
 }
 
 /**
+ * @param  {Cart}            cart
+ * @param  {object}          payload
+ * @param  {Array<LineItem>} payload.lineItems
+ * @return {Cart}
+ */
+function updateCart (cart, payload) {
+  return Object.assign(cart, payload);
+}
+
+/**
  * @param  {Cart} cart
  * @param  {Product} product
  * @param  {number} qty
@@ -36,19 +46,19 @@ function addItem (cart, product, qty) {
   if (!isInCart) {
     var lineItem = createLineItem(product, qty);
 
-    return {
+    return updateCart(cart, {
       lineItems: lineItems.concat(lineItem),
-    };
+    });
   }
 
-  return {
+  return updateCart(cart, {
     lineItems: lineItems.map(function (lineItem) {
       if (lineItem.productId === product.id) {
         var newQty = lineItem.qty + qty;
         return Object.assign({}, lineItem, { qty: newQty });
       }
     }),
-  };
+  });
 }
 
 /**
@@ -76,11 +86,11 @@ function total (cart, discount) {
 function removeItem (cart, productId) {
   var lineItems = cart.lineItems;
 
-  return {
+  return updateCart(cart, {
     lineItems: lineItems.filter(function (lineItem) {
       return lineItem.productId !== productId
     }),
-  }
+  });
 }
 
 /**
