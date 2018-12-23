@@ -9,6 +9,19 @@ router.get('/products', function (request, response) {
   });
 });
 
+router.post('/products', function (request, response) {
+  var body = request.body;
+  var payload = {
+    name: body.name,
+    price: Number(body.price),
+    description: body.description || '',
+  };
+
+  response.json({
+    products: productRepo.create(payload),
+  });
+});
+
 router.get('/products/:id', function (request, response) {
   var productId = request.params.id;
   var product = productRepo.findById(productId)
