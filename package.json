@@ -3,6 +3,7 @@
     "start": "node index.js",
     "test": "jest"
   },
+  "types": "index.d.ts",
   "devDependencies": {
     "jest": "^23.6.0"
   },

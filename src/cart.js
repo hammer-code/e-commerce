@@ -53,9 +53,9 @@ function addItem (cart, product, qty) {
 
 /**
  * Menghitung jumlah total harga cart
- * @param  {Cart}    cart
- * @param  {object?} discount
- * @return {number}  Total harga dari cart
+ * @param  {Cart}     cart
+ * @param  {Discount} discount
+ * @return {number}   Total harga dari cart
  */
 function total (cart, discount) {
   var lineItems = cart.lineItems;
@@ -93,10 +93,8 @@ function format (total) {
 }
 
 /**
- * @param  {number} total
- * @param  {object} discount
- * @param  {string} discount.amount
- * @param  {string} discount.type   Possible values: percent / nominal
+ * @param  {number}   total
+ * @param  {Discount} discount
  * @return {number}
  */
 function applyDiscount (total, discount) {
