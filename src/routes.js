@@ -61,4 +61,20 @@ router.patch('/products/:id', function (request, response) {
   });
 });
 
+router.delete('/products/:id', function (request, response) {
+  var productId = request.params.id;
+
+  try {
+    productRepo.remove(productId);
+  } catch (error) {
+    return response.status(404).json({
+      message: error.message,
+    });
+  }
+
+  response.json({
+    message: 'Product with ID' + productId + 'was successfully been deleted.',
+  });
+});
+
 module.exports = router;

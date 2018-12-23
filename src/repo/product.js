@@ -71,6 +71,26 @@ function updateById (productId, payload) {
 }
 
 /**
+ * Remove specific product from repository
+ * @param  {string}
+ * @throws {Error}
+ * @return {null}
+ */
+function remove (productId) {
+  var productIds = PRODUCTS.map(function (product) {
+    return product.id;
+  });
+
+  var productIndex = productIds.indexOf(productId);
+
+  if (productId === -1) throw new Error('Product with ID ' + productId + ' was not found.');
+
+  PRODUCTS.splice(productIndex, 1);
+
+  return null;
+}
+
+/**
  * Get last product
  * @return {Entities.Product|null}
  */
@@ -96,6 +116,7 @@ function nextID () {
 module.exports = {
   all: all,
   create: create,
+  remove: remove,
   findById: findById,
   updateById: updateById,
 };
