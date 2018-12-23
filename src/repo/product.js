@@ -26,7 +26,7 @@ function findById (productId) {
  * Create new product.
  * @param  {object}  payload
  * @param  {string}  payload.name
- * @param  {string}  payload.price
+ * @param  {number}  payload.price
  * @param  {string?} payload.description
  * @return {Product}
  */
@@ -43,6 +43,31 @@ function create (payload) {
   PRODUCTS.push(newProduct);
 
   return newProduct;
+}
+
+/**
+ * Update specific product.
+ * @param  {string}  productId
+ * @param  {object}  payload
+ * @param  {string?} payload.name
+ * @param  {string?} payload.price
+ * @param  {string?} payload.description
+ * @return {Entities.Product}
+ */
+function updateById (productId, payload) {
+  var product = findById(productId);
+
+  if (!product) throw new Error('Product with ID: ' + productId + ' was not found');
+
+  var name = payload.name;
+  var price = payload.price;
+  var description = payload.description;
+
+  if (name) product.name = name;
+  if (price) product.price = price;
+  if (description) product.description = name;
+
+  return product;
 }
 
 /**
@@ -67,8 +92,10 @@ function nextID () {
   return 'product-' + (lastNumber + 1);
 }
 
+
 module.exports = {
   all: all,
   create: create,
   findById: findById,
+  updateById: updateById,
 };
