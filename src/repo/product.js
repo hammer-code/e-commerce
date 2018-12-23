@@ -57,7 +57,7 @@ function create (payload) {
 function updateById (productId, payload) {
   var product = findById(productId);
 
-  if (!product) throw new Error('Product with ID: ' + productId + ' was not found');
+  if (!product) throw new Error('Product with ID `' + productId + '` was not found.');
 
   var name = payload.name;
   var price = payload.price;
@@ -65,7 +65,7 @@ function updateById (productId, payload) {
 
   if (name) product.name = name;
   if (price) product.price = price;
-  if (description) product.description = name;
+  if (description) product.description = description;
 
   return product;
 }
