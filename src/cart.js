@@ -3,8 +3,13 @@
  */
 function create() {
   return {
+    id: generateID(),
     lineItems: [],
   }
+}
+
+function generateID() {
+  return Math.random().toString().replace('0.', '');
 }
 
 /**

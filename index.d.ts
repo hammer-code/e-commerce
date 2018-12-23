@@ -21,6 +21,7 @@ export interface Discount {
 }
 
 export interface Cart {
+  id: string;
   lineItems: Array<LineItem>;
 }
 
