@@ -1,15 +1,15 @@
 var express = require('express');
-var productRepo = require('./repo/product');
+var productRepo = require('../repo/product');
 
 var router = express.Router();
 
-router.get('/products', function (request, response) {
+router.get('/', function (request, response) {
   response.json({
     products: productRepo.all(),
   });
 });
 
-router.post('/products', function (request, response) {
+router.post('/', function (request, response) {
   var body = request.body;
   var payload = {
     name: body.name,
@@ -22,7 +22,7 @@ router.post('/products', function (request, response) {
   });
 });
 
-router.get('/products/:id', function (request, response) {
+router.get('/:id', function (request, response) {
   var productId = request.params.id;
   var product = productRepo.findById(productId)
 
@@ -37,7 +37,7 @@ router.get('/products/:id', function (request, response) {
   });
 });
 
-router.patch('/products/:id', function (request, response) {
+router.patch('/:id', function (request, response) {
   var productId = request.params.id;
   var body = request.body;
   var payload = {
@@ -61,7 +61,7 @@ router.patch('/products/:id', function (request, response) {
   });
 });
 
-router.delete('/products/:id', function (request, response) {
+router.delete('/:id', function (request, response) {
   var productId = request.params.id;
 
   try {
