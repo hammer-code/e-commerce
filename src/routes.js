@@ -17,8 +17,8 @@ router.post('/products', function (request, response) {
     description: body.description || '',
   };
 
-  response.json({
-    products: productRepo.create(payload),
+  response.status(201).json({
+    product: productRepo.create(payload),
   });
 });
 
