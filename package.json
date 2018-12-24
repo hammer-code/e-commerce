@@ -6,6 +6,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "lerna run start --stream",
+    "test": "npm run test:api",
     "test:api": "lerna run test --scope api --stream"
   },
   "repository": {
