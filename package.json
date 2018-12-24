@@ -1,0 +1,22 @@
+{
+  "name": "e-commerce",
+  "dependencies": {
+    "lerna": "^3.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "lerna run start --stream",
+    "test:api": "lerna run test --scope api --stream"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hammer-code/e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hammer-code/e-commerce/issues"
+  },
+  "homepage": "https://github.com/hammer-code/e-commerce#readme"
+}

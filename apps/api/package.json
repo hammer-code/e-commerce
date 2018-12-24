@@ -1,4 +1,6 @@
 {
+  "name": "api",
+  "private": true,
   "scripts": {
     "start": "node index.js",
     "test": "jest --verbose"
