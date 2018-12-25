@@ -63,13 +63,13 @@ describe('cart module', () => {
   test('add product to cart', function () {
     var productA = {
       id: 'product-1',
-      name: 'Eloquent JS',
+      name: 'Book A',
       price: 50,
       description: 'Lorem',
     };
     var productB = {
       id: 'product-2',
-      name: 'Refactoring',
+      name: 'Book B',
       price: 20,
       description: 'Lorem',
     };
@@ -83,12 +83,12 @@ describe('cart module', () => {
 
     expect(lineItems.length).toBe(2);
     expect(lineItems[0].productId).toBe('product-1');
-    expect(lineItems[0].name).toBe('Eloquent JS');
+    expect(lineItems[0].name).toBe('Book A');
     expect(lineItems[0].price).toBe(50);
     expect(lineItems[0].qty).toBe(2);
     expect(lineItems[0].description).toBe(undefined);
     expect(lineItems[1].productId).toBe('product-2');
-    expect(lineItems[1].name).toBe('Refactoring');
+    expect(lineItems[1].name).toBe('Book B');
     expect(lineItems[1].price).toBe(20);
     expect(lineItems[1].qty).toBe(1);
     expect(lineItems[1].description).toBe(undefined);
@@ -99,9 +99,30 @@ describe('cart module', () => {
 
     expect(lineItems.length).toBe(2);
     expect(lineItems[0].productId).toBe('product-1');
-    expect(lineItems[0].name).toBe('Eloquent JS');
+    expect(lineItems[0].name).toBe('Book A');
     expect(lineItems[0].price).toBe(50);
     expect(lineItems[0].qty).toBe(3);
+  });
+
+  test('updateItemQty', function () {
+    var setup = setupCart();
+    var c = setup.cart;
+    var lineItems = c.lineItems;
+
+    expect(lineItems.length).toBe(2);
+    expect(lineItems[1].productId).toBe('product-2');
+    expect(lineItems[1].name).toBe('Eloquent JS');
+    expect(lineItems[1].price).toBe(40);
+    expect(lineItems[1].qty).toBe(1);
+
+    c = cart.setItemQty(c, 'product-2', 2);
+    lineItems = c.lineItems;
+
+    expect(lineItems.length).toBe(2);
+    expect(lineItems[1].productId).toBe('product-2');
+    expect(lineItems[1].name).toBe('Eloquent JS');
+    expect(lineItems[1].price).toBe(40);
+    expect(lineItems[1].qty).toBe(2);
   });
 
   test('total', function () {

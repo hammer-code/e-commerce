@@ -107,6 +107,26 @@ function removeItem (cart, productId) {
 }
 
 /**
+ * @param  {Cart} cart
+ * @param  {string} productId
+ * @param  {number} qty
+ * @return {Cart}
+ */
+function setItemQty (cart, productId, qty) {
+  var lineItems = cart.lineItems;
+
+  return updateCart(cart, {
+    lineItems: lineItems.map(function (lineItem) {
+      if (lineItem.productId === productId) {
+        return Object.assign({}, lineItem, { qty: qty });
+      }
+
+      return lineItem;
+    }),
+  });
+}
+
+/**
  * Format ke bentuk lbh bagus dibaca
  * @param  {number} total
  * @return {string}
@@ -154,6 +174,7 @@ module.exports = {
   total: total,
   format: format,
   removeItem: removeItem,
+  setItemQty: setItemQty,
   applyDiscount: applyDiscount,
   discountByPercent: discountByPercent,
   discountByNominal: discountByNominal,

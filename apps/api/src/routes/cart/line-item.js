@@ -30,6 +30,29 @@ router.post('/', function (request, response) {
   });
 });
 
+router.patch('/:productId', function (request, response) {
+  var cartId = request.params.id;
+  var productId = request.params.productId;
+  var qty = request.body.qty;
+
+  var c = cartRepo.findById(cartId);
+
+  if (!c) {
+    return response.status(404).json({
+      message: 'Cart with ID `' + cartId + '` was not found',
+    });
+  }
+
+  c = cart.setItemQty(c, productId, qty);
+
+  c = cartRepo.persist(c);
+
+  response.json({
+    cart: c,
+    total: cart.total(c),
+  });
+});
+
 router.delete('/:productId', function (request, response) {
   var cartId = request.params.id;
   var productId = request.params.productId;
