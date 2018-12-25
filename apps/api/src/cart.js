@@ -68,6 +68,8 @@ function addItem (cart, product, qty) {
         var newQty = lineItem.qty + qty;
         return Object.assign({}, lineItem, { qty: newQty });
       }
+
+      return lineItem;
     }),
   });
 }

@@ -67,19 +67,41 @@ describe('cart module', () => {
       price: 50,
       description: 'Lorem',
     };
+    var productB = {
+      id: 'product-2',
+      name: 'Refactoring',
+      price: 20,
+      description: 'Lorem',
+    };
 
     var c = cart.create();
 
     c = cart.addItem(c, productA, 2);
+    c = cart.addItem(c, productB, 1);
 
     var lineItems = c.lineItems;
 
-    expect(lineItems.length).toBe(1);
+    expect(lineItems.length).toBe(2);
     expect(lineItems[0].productId).toBe('product-1');
     expect(lineItems[0].name).toBe('Eloquent JS');
     expect(lineItems[0].price).toBe(50);
     expect(lineItems[0].qty).toBe(2);
     expect(lineItems[0].description).toBe(undefined);
+    expect(lineItems[1].productId).toBe('product-2');
+    expect(lineItems[1].name).toBe('Refactoring');
+    expect(lineItems[1].price).toBe(20);
+    expect(lineItems[1].qty).toBe(1);
+    expect(lineItems[1].description).toBe(undefined);
+
+    c = cart.addItem(c, productA, 1);
+
+    lineItems = c.lineItems;
+
+    expect(lineItems.length).toBe(2);
+    expect(lineItems[0].productId).toBe('product-1');
+    expect(lineItems[0].name).toBe('Eloquent JS');
+    expect(lineItems[0].price).toBe(50);
+    expect(lineItems[0].qty).toBe(3);
   });
 
   test('total', function () {
