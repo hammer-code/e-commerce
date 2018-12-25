@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-  <title>Toko Hammercode</title>
+  <title>Keranjang - Toko Hammercode</title>
+
   <style>
-    .product-card {
-      padding: 1rem;
-      border-radius: 3px;
-      display: inline-block;
-      width: 220px;
-      max-width: 220px;
+    .cart-row {
+      display: table-row;
+    }
+
+    .row-cell {
+      padding: 0.5rem;
+      display: table-cell;
     }
   </style>
 </head>
@@ -53,27 +55,17 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title is-1">Hammercode Shop</h1>
+          <h1 class="title is-3">Keranjang Belanja</h1>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column">
-          <h2 class="title is-2">Recommended</h2>
-        </div>
-      </div>
-      <div id="products" class="columns"></div>
-    </div>
-  </section>
+  <div class="container">
+    <div id="app"></div>
+  </div>
 
   <script src="/js/lib/request.js"></script>
-  <script src="/js/lib/bus.js"></script>
-  <script src="/js/lib/cart.js"></script>
-  <script src="/js/lib/add-button.js"></script>
-  <script src="/js/home.js"></script>
+  <script src="/js/cart.js"></script>
 </body>
 </html>

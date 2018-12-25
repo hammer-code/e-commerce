@@ -1,5 +1,7 @@
 var BASE_ENDPOINT_URL = 'http://localhost:3000/api';
 
+var bus = new Bus();
+
 getProducts();
 
 function getProducts () {
@@ -17,24 +19,51 @@ function getProducts () {
 }
 
 function appendToAppEl ($el) {
-  var $app = document.querySelector('#app');
+  var $products = document.querySelector('#products');
 
-  $app.appendChild($el);
+  $products.appendChild($el);
 }
 
 function createProductNameEl (name, tag) {
   var $name = document.createElement(tag);
+  $name.setAttribute('class', 'title is-3');
   $name.innerText = name;
   return $name;
 }
 
+function createProductPriceEl (price) {
+  var $price = document.createElement('p');
+  $price.innerText = '$' + price;
+  return $price;
+}
+
 function createProductCardEl (product) {
-  var $name = createProductNameEl(product.name, 'h3');
+  var $column = document.createElement('div');
+  $column.setAttribute('class', 'column');
 
   var $card = document.createElement('div');
-  $card.setAttribute('class', 'product-card');
+  $card.setAttribute('class', 'card product-card');
+
+  var $name = createProductNameEl(product.name, 'h3');
+  var $price = createProductPriceEl(product.price);
 
   $card.appendChild($name);
+  $card.appendChild($price);
 
-  return $card;
+  var addButton = new AddButton(product, bus)
+  addButton.mount($card);
+
+  $column.appendChild($card);
+
+  return $column;
 }
+
+var cart = new Cart(bus, {
+  tag: 'a',
+  attributes: {
+    href: '/cart',
+    class: 'navbar-item',
+  }
+});
+
+cart.mount(document.querySelector('#cart'));
