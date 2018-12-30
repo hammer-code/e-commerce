@@ -8,6 +8,7 @@
   "types": "index.d.ts",
   "devDependencies": {
     "jest": "^23.6.0",
+    "now": "^12.1.14",
     "supertest": "^3.3.0"
   },
   "dependencies": {

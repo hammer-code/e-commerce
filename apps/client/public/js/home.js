@@ -2,13 +2,10 @@ var BASE_ENDPOINT_URL = 'http://localhost:3000/api';
 
 var bus = new Bus();
 
-getProducts();
+showProducts();
 
-function getProducts () {
-  return fetch(BASE_ENDPOINT_URL + '/products')
-    .then(function (response) {
-      return response.json();
-    })
+function showProducts () {
+  return getProducts()
     .then(function (data) {
       data.products.forEach(function (product) {
         $productCard = createProductCardEl(product);
