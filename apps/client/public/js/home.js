@@ -43,6 +43,7 @@ function createProductCardEl (product) {
 
   var $card = document.createElement('div');
   $card.setAttribute('class', 'card product-card');
+  $card.setAttribute('data-product-id', product.id);
 
   var $name = createProductNameEl(product.name, 'h3');
   var $price = createProductPriceEl(product.price);
@@ -61,6 +62,7 @@ function createProductCardEl (product) {
 var cart = new Cart(bus, {
   tag: 'a',
   attributes: {
+    id: 'nav-cart',
     href: '/cart',
     class: 'navbar-item',
   }
